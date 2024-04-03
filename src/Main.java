@@ -16,52 +16,50 @@ public class Main {
         new Thread(() -> {
             for (String text : texts) {
                 StringBuilder str = new StringBuilder(text);
-                String invertText = str.toString();
-                if (text.length() == 3) {
-                    if (text.equals(invertText)) {
+                String invertText = str.reverse().toString();
+                if (text.equals(invertText)) {
+                    if (text.length() == 3) {
                         countThree.getAndIncrement();
-                    } else if (b1(text)) {
-                        countThree.getAndIncrement();
-                    } else if (b2(text)) {
-                        countThree.getAndIncrement();
+                    } else if (text.length() == 4) {
+                        countFour.getAndIncrement();
+                    } else if (text.length() == 5) {
+                        countFive.getAndIncrement();
                     }
                 }
             }
         }).start();
+
         new Thread(() -> {
             for (String text : texts) {
-                StringBuilder str = new StringBuilder(text);
-                String invertText = str.toString();
-                if (text.length() == 4) {
-                    if (text.equals(invertText)) {
+                if (b1(text)) {
+                    if (text.length() == 3) {
+                        countThree.getAndIncrement();
+                    } else if (text.length() == 4) {
                         countFour.getAndIncrement();
-                    } else if (b1(text)) {
-                        countFour.getAndIncrement();
-                    } else if (b2(text)) {
-                        countFour.getAndIncrement();
+                    } else if (text.length() == 5) {
+                        countFive.getAndIncrement();
                     }
                 }
             }
         }).start();
+
         new Thread(() -> {
             for (String text : texts) {
-                StringBuilder str = new StringBuilder(text);
-                String invertText = str.toString();
-                if (text.length() == 5) {
-                    if (text.equals(invertText)) {
-                        countFive.getAndIncrement();
-                    } else if (b1(text)) {
-                        countFive.getAndIncrement();
-                    } else if (b2(text)) {
+                if (b2(text)) {
+                    if (text.length() == 3) {
+                        countThree.getAndIncrement();
+                    } else if (text.length() == 4) {
+                        countFour.getAndIncrement();
+                    } else if (text.length() == 5) {
                         countFive.getAndIncrement();
                     }
                 }
             }
         }).start();
+
         System.out.println("Красивых слов с длиной 3: " + countThree);
         System.out.println("Красивых слов с длиной 4: " + countFour);
         System.out.println("Красивых слов с длиной 5: " + countFive);
-
     }
 
     public static boolean b2(String text) {
